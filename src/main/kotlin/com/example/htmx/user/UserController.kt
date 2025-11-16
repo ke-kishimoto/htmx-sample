@@ -13,6 +13,6 @@ class UserController(
     fun index(model: Model): String {
         val users = userService.getAllUsers()
         model.addAttribute("users", users)
-        return "list"
+        return "user/list"
     }
 }
