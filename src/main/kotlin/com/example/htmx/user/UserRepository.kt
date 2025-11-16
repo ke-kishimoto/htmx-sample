@@ -15,4 +15,10 @@ class UserRepository(
         return namedParameterJdbcTemplate.query(sql, DataClassRowMapper(User::class.java))
     }
 
+    fun findByUsernameLike(q: String): List<User> {
+        val sql = "SELECT * FROM users WHERE name LIKE :q OR email LIKE :q"
+        val params = mapOf("q" to "%$q%")
+        return namedParameterJdbcTemplate.query(sql, params, DataClassRowMapper(User::class.java))
+    }
+
 }

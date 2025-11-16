@@ -11,4 +11,8 @@ class UserService(
     fun getAllUsers(): List<User> {
         return userRepository.findAllUsernames()
     }
+
+    fun get(q: String): List<User> {
+        return userRepository.findByUsernameLike(q)
+    }
 }
