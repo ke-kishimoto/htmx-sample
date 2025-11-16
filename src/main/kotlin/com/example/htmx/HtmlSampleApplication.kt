@@ -1,4 +1,4 @@
-package com.example.HtmlSample
+package com.example.htmx
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
