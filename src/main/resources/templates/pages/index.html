@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title th:text="user list">user list</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <h1>User list</h1>
+    <div id="search">
+      <label for="keyword">キーワード検索</label>
+      <input id="keyword" type="text" name="q" placeholder="キーワード検索">
+      <button hx-get="/users" hx-target="#main" hx-include="#search">Search</button>
+    </div>
+    <div id="main">
+      <div th:replace="~{fragments/user-list :: user-list}"></div>
+    </div>
+</main>
+</body>
+</html>

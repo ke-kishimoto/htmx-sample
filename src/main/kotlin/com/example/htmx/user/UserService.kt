@@ -8,11 +8,11 @@ class UserService(
     private val userRepository: UserRepository
 ) {
 
-    fun getAllUsers(): List<User> {
-        return userRepository.findAllUsernames()
+    fun getAllUsers(page: Int): List<User> {
+        return userRepository.findAllUsernames(page)
     }
 
-    fun get(q: String): List<User> {
-        return userRepository.findByUsernameLike(q)
+    fun get(search: String, page: Int): List<User> {
+        return userRepository.findByUsernameLike(search, page)
     }
 }

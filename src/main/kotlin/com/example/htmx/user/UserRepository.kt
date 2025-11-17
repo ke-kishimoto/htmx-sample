@@ -10,14 +10,16 @@ class UserRepository(
     private val namedParameterJdbcTemplate: NamedParameterJdbcTemplate
 ) {
 
-    fun findAllUsernames(): List<User> {
-        val sql = "SELECT * FROM users"
-        return namedParameterJdbcTemplate.query(sql, DataClassRowMapper(User::class.java))
+    fun findAllUsernames(page: Int): List<User> {
+        val sql = "SELECT * FROM users ORDER BY id LIMIT 10 OFFSET :offset"
+        val params = mapOf("offset" to (page - 1) * 10)
+        return namedParameterJdbcTemplate.query(sql, params, DataClassRowMapper(User::class.java))
     }
 
-    fun findByUsernameLike(q: String): List<User> {
-        val sql = "SELECT * FROM users WHERE name LIKE :q OR email LIKE :q"
-        val params = mapOf("q" to "%$q%")
+    fun findByUsernameLike(search: String, page: Int): List<User> {
+        val sql = "SELECT * FROM users WHERE name LIKE :search OR email LIKE :search ORDER BY id LIMIT 10 OFFSET :offset"
+        val params = mapOf("search" to "%$search%")
+            .plus("offset" to (page - 1) * 10)
         return namedParameterJdbcTemplate.query(sql, params, DataClassRowMapper(User::class.java))
     }
 

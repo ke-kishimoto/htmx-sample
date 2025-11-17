@@ -1,0 +1,29 @@
+<th:block th:fragment="user-list">
+    <table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+    </tr>
+    </table>
+    <div>
+        <a th:if="${page > 1}"
+           th:href="@{/users(q=${search}, page=${page - 1})}"
+           th:hx-get="@{/users(q=${search}, page=${page - 1})}"
+           hx-push-url="true"
+           hx-target="#main">前ページ</a>
+        <a th:if="${#lists.size(users) == 10}"
+           th:href="@{/users(q=${search}, page=${page + 1})}"
+           th:hx-get="@{/users(q=${search}, page=${page + 1})}"
+           hx-push-url="true"
+           hx-target="#main">次ページ</a>
+    </div>
+</th:block>
